@@ -16,9 +16,4 @@ services:
 
     working_dir: /chijji-moni
 
-    environment:
-      SUPABASE_URL: http://host.docker.internal:54321
-      JWT_SECRET: KbzVX1ZlViuzPHUbzm9VyiQGCLvLeDCdnQDbN4kAUam
-      SUPABASE_SECRET_KEY: sb_secret_N7UND0UgjKTVK-Uodkm0Hg_xSvEMPvz
-
     restart: unless-stopped
