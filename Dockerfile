@@ -7,6 +7,7 @@ RUN go mod download
 COPY . /chijji-moni/
 RUN task build
 
+
 # Run stage
 FROM alpine:latest
 WORKDIR /chijji-moni
