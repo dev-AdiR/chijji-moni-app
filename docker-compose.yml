@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  # supabase:
+  #   image: supabase/supabase
+  #   ports:
+  #     - "54321:54321"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chijji-moni-app
+
+    ports:
+      - "8080:8080"
+
+    working_dir: /chijji-moni
+
+    environment:
+      SUPABASE_URL: http://host.docker.internal:54321
+      JWT_SECRET: KbzVX1ZlViuzPHUbzm9VyiQGCLvLeDCdnQDbN4kAUam
+      SUPABASE_SECRET_KEY: sb_secret_N7UND0UgjKTVK-Uodkm0Hg_xSvEMPvz
+
+    restart: unless-stopped
