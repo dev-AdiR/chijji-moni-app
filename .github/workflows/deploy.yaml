@@ -2,6 +2,10 @@ name: Build and Deploy to EKS
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy (e.g. v1.0.3)'
+        required: true
 
 jobs:
   build-and-deploy:
@@ -22,9 +26,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: |
-            adityarawat1999/chijji-moni-app:${{ github.sha }}
-            adityarawat1999/chijji-moni-app:latest
+          tags: adityarawat1999/chijji-moni-app:${{ github.event.inputs.version }}
 
       - name: Trigger infra repo
         run: |
@@ -32,4 +34,4 @@ jobs:
             -H "Authorization: token ${{ secrets.INFRA_REPO_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/dev-AdiR/chijji-moni-infra/dispatches \
-            -d '{"event_type": "deploy", "client_payload": {"sha": "${{ github.sha }}"}}'
+            -d '{"event_type": "deploy", "client_payload": {"version": "${{ github.event.inputs.version }}"}}'
