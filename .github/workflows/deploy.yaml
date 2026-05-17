@@ -22,7 +22,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: adityarawat1999/chijji-moni-app:${{ github.sha }}
+          tags: |
+            adityarawat1999/chijji-moni-app:${{ github.sha }}
+            adityarawat1999/chijji-moni-app:latest
 
       - name: Trigger infra repo
         run: |
