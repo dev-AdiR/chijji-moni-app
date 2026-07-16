@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"chijji-moni-backend-go/domain"
+	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -23,7 +24,11 @@ import (
 // }
 
 func NewEnv() *domain.Env {
-	_ = godotenv.Load()
+	err := godotenv.Load()
+	if err != nil {
+		// log.Fatal("Error loading .env file", err)
+		panic(fmt.Errorf("Error loading .env file %w", err))
+	}
 
 	return &domain.Env{
 		SupabaseUrl: os.Getenv("SUPABASE_URL"),

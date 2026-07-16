@@ -1,2 +1,5 @@
 app/.env
 app/secret.yaml
+dist/*
+dist/app.exe
+.env

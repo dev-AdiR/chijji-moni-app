@@ -22,9 +22,10 @@ func ResgisterDb(env *domain.Env, dbType enums.DbName) domain.DB {
 
 // #region Private functions
 func registerSupabase(env *domain.Env) domain.DB {
+	fmt.Println(env)
 	client, err := supabase.NewClient(env.SupabaseUrl, env.SupabaseKey, &supabase.ClientOptions{})
 	if err != nil {
-		fmt.Println("Failed to initialize the client", err)
+		panic(fmt.Errorf("Failed to initialize the client %w", err))
 	}
 
 	return &database.SupabaseDb{

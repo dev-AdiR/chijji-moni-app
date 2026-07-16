@@ -42,9 +42,13 @@ func login(c *gin.Context) {
 	}
 
 	result, err := userRepo.Fetch(username)
-
 	if err != nil {
 		c.String(http.StatusBadRequest, fmt.Sprintln(err))
+	}
+
+	if result == nil {
+		c.String(http.StatusNotFound, fmt.Sprintln(domain.UserNotFound))
+		return
 	}
 
 	err = utils.ComparePasswordHash([]byte(result.Password), []byte(password))
@@ -54,7 +58,7 @@ func login(c *gin.Context) {
 		return
 	}
 
-	tokenString, err := utils.GenerateToken(appContext.Env, result)
+	tokenString, _ := utils.GenerateToken(appContext.Env, result)
 
 	c.JSON(200, gin.H{
 		"token": tokenString,

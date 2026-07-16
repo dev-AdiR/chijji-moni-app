@@ -17,6 +17,7 @@ tasks:
   start:
     dir: dist
     cmds:
+      - cp ../.env .env 
       - ./{{.BIN_NAME}}{{.EXT}}
     
   run:
